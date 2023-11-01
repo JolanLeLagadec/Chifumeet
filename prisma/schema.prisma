@@ -1,0 +1,107 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             Int      @unique @default(autoincrement())
+  email          String   @unique
+  hashedPassword String
+  name           String
+  age            String
+  image          String?
+  bio            String?
+  note           String?
+  interests      String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  participation Participation[]
+  notifications Notification[]
+  Ranking       Ranking?
+}
+
+model Participation {
+  id        Int      @unique @default(autoincrement())
+  userId    Int
+  duelId    Int
+  statut    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User User @relation(fields: [userId], references: [id])
+  Duel Duel @relation(fields: [duelId], references: [id])
+}
+
+model Duel {
+  id         Int      @unique @default(autoincrement())
+  userWonId  Int
+  userLostId Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  participation Participation[]
+  Chat          Chat?
+}
+
+model Message {
+  id             Int      @unique @default(autoincrement())
+  chatId         Int
+  userSendingId  Int?
+  userReceiverId Int?
+  content        String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  Chat Chat @relation(fields: [chatId], references: [id])
+}
+
+model Ranking {
+  id        Int      @unique @default(autoincrement())
+  userId    Int      @unique
+  rating    String?
+  score     String
+  rank      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User User @relation(fields: [userId], references: [id])
+}
+
+model Notification {
+  id        Int      @unique @default(autoincrement())
+  userId    Int
+  type      String // invitation? acceptation?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User     @relation(fields: [userId], references: [id])
+}
+
+model Chat {
+  id        Int       @unique @default(autoincrement())
+  duelId    Int       @unique
+  matchId   Int       @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Message   Message[]
+
+  Duel  Duel  @relation(fields: [duelId], references: [id])
+  Match Match @relation(fields: [matchId], references: [id])
+}
+
+model Match {
+  id      Int @unique @default(autoincrement())
+  user1Id Int
+  user2Id Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Chat      Chat?
+}
