@@ -7,21 +7,22 @@ import SidebarMenu from '@/components/SidebarMenu'
 
 export const metadata = {
   title: 'Chifumeet',
-
 }
 
 export default function RootLayout({ children }) {
+  
   return (
     <html lang="en">
       <body className={roboto.className}>
-        
+       
         <ThemeProvider attribute="class" defaultTheme="system">
-        <Navbar />
-          <main className=' min-h-screen relative dark:bg-background'>
+        <Navbar  />
+          <main className=' min-h-screen relative dark:bg-gradient-to-b from-background to-slate-900'>
           <SidebarMenu />
             {children}
           </main>
         </ThemeProvider>   
+      
       </body>
     </html>
   )
