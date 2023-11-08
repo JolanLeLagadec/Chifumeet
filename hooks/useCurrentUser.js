@@ -18,11 +18,8 @@ export const useCurrentUser = async () => {
                 email: true,
                 bio: true,
                 age: true
-
             }
         })
         return currentUser
     }return null;
-   
-    
 }

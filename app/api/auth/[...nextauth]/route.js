@@ -15,7 +15,7 @@ export const authOptions = {
         password: { label: 'password', type: 'password' }
       },
       async authorize(credentials) {
-        console.log('ici credentials', credentials)
+   
         if (!credentials?.email || !credentials?.password) {
           throw new Error('Invalid credentials');
         }

@@ -1,12 +1,12 @@
 import React from 'react'
+import { epilogue } from '@/app/fonts'
 
 export default function Header({label}) {
   return (
-    <div>
-        <h1 className='text-'>
-
+    <div className='p-4 text-center'>
+        <h1 className={`${epilogue.className} text-4xl font-normal tracking-[0.3em] dark:text-neutral-300`}>
+          {label}
         </h1>
-
     </div>
   )
 }

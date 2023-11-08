@@ -9,28 +9,48 @@ import Link from "next/link"
 import { Button } from "./ui/button"
 import { useForm } from "react-hook-form";
 import { signIn } from 'next-auth/react'
-
+import { useEffect, useRef } from "react"
 export default function Registration() {
+
+  const { register, setValue, formState: { errors }, handleSubmit } = useForm();
+  
+  const imageInputRef = useRef()
+
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setValue('latitude', position.coords.latitude)
+      setValue('longitude', position.coords.longitude)
+    }, (error) => {
+      console.error('Erreur lors de l\'obtention de la position', error)
+    })
+
+  }, [setValue])
+
   const stepper = useStep()
 
-  const { register, formState: { errors }, handleSubmit } = useForm();
-
   const onSubmit = async (formData) => {
+
+    const formDataToSend = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      formDataToSend.append(key, value);
+    });
+    if (imageInputRef.current?.files[0]) {
+      formDataToSend.append('image', imageInputRef.current.files[0]);
+    }
+
     try {
       const res = await fetch('api/register', {
         method: 'POST',
-        headers: {
-          'Content-type': 'application/json'
-        },
-        body: JSON.stringify(formData)
+        body: formDataToSend
       })
       if (!res.ok) {
         throw new Error('Erreur lors de l\'inscription')
       }
       const data = await res.json()
+      console.log(data)
       if (res.ok) {
         const { email, password } = formData
-
         signIn('credentials', {
           email,
           password,
@@ -73,6 +93,9 @@ export default function Registration() {
                   <span>Age</span>
                   <Input {...register('age')} className="focus:outline-none" type="text" name="age" />
                 </div>
+                <input {...register('latitude')} type="hidden" />
+                <input {...register('longitude')} type="hidden" />
+
                 <div className='flex flex-col  items-center'>
                   <div className="flex gap-12 items-center justify-center mb-6">
 
@@ -88,7 +111,7 @@ export default function Registration() {
               <div className="flex flex-col items-center justify-center  gap-8 h-full py-12 rounded-lg mt-8  transition duration-300 ">
 
                 <Label className="text-lg font-normal" htmlFor="picture">Ajoutez une photo de profil!</Label>
-                <Input {...register('image')} className="focus:outline-none cursor-pointer" id="picture" type="file" name='image' />
+                <Input ref={imageInputRef} {...register('image')} className="focus:outline-none cursor-pointer" id="picture" type="file" name='image' />
                 <div className="flex justify-center gap-12 items-center">
                   <Button variant='ghost' className='border-2 border-neutral-600' onClick={() => stepper.prevStep()}>Précédent</Button>
                   <Button onClick={() => stepper.nextStep()}>Suivant</Button>

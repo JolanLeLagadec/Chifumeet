@@ -1,8 +1,9 @@
-import Navbar from '@/components/Navbar'
+import Navbar from '@/components/layout/Navbar'
 import { roboto } from './fonts'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
-import SidebarMenu from '@/components/SidebarMenu'
+import SidebarMenu from '@/components/layout/SidebarMenu'
+import Footer from '@/components/layout/Footer'
 
 
 export const metadata = {
@@ -10,19 +11,19 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
-  
+
   return (
     <html lang="en">
       <body className={roboto.className}>
-       
         <ThemeProvider attribute="class" defaultTheme="system">
-        <Navbar  />
-          <main className=' min-h-screen relative dark:bg-gradient-to-b from-background to-slate-900'>
-          <SidebarMenu />
-            {children}
-          </main>
-        </ThemeProvider>   
-      
+          <Navbar />
+          <main className='relative dark:bg-gradient-to-b from-background to-slate-900'>
+            <SidebarMenu />
+            {children}   
+          </main>    
+          <Footer />    
+        </ThemeProvider>
+
       </body>
     </html>
   )

@@ -1,18 +1,17 @@
 'use client'
-import { useFormStatus } from 'react-dom'
+
 import { Button } from './ui/button'
+import { Loader2 } from 'lucide-react'
 
-export default function ButtonSubmitForm({className, children, variant, type}) {
-
-    const { pending } = useFormStatus()
+export default function ButtonSubmitForm({className, children, variant, type, disabled}) {   
     return (
         <div>
-            <Button  disabled={pending} type={type} variant={variant} className={className} >
+            <Button  disabled={disabled} type={type} variant={variant} className={className} >
             {
-            pending ? (
-               <span>Loading...</span>
+            disabled ? (
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
             ) :
-                <span>{children}</span>
+               <span>{children}</span>
             }
             </Button>
         </div>
