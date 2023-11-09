@@ -4,7 +4,7 @@ import { epilogue } from '@/app/fonts'
 
 export default function Footer() {
   return (
-    <div className={`${epilogue.className} min-h-screen w-full  bg-secondary`}>
+    <div className={`${epilogue.className} min-h-screen w-full  bg-secondary z-0`}>
         <div className='flex space-between p-14'>
             <div className='flex flex-col w-1/2'>
                 <h1 className='font-extrabold text-3xl tracking-[0.1em] text-slate-400'>JOLAN <span className='font-normal text-primary'>&apos;s </span></h1>

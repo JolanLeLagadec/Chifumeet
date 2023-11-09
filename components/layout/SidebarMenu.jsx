@@ -8,7 +8,7 @@ import { signOut } from 'next-auth/react'
 export default function SidebarMenu() {
 
   const sidebarMenu = useSidebar()
-  const sidebarClass = 'w-full transition transform ease-in-out duration-300 absolute  bg-background z-50 '
+  const sidebarClass = 'w-full transition transform ease-in-out duration-300 absolute bg-background z-50 '
 
   return (
     <div className={`${sidebarMenu.isOpen ? 'translate-x-0' : '-translate-x-full'}  ${sidebarClass} `}>

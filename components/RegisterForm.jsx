@@ -9,13 +9,27 @@ import Link from "next/link"
 import { Button } from "./ui/button"
 import { useForm } from "react-hook-form";
 import { signIn } from 'next-auth/react'
-import { useEffect, useRef } from "react"
+import { useEffect } from "react"
+import {  useState } from 'react'
+import { Loader2 } from "lucide-react"
+
 export default function Registration() {
 
   const { register, setValue, formState: { errors }, handleSubmit } = useForm();
-  
-  const imageInputRef = useRef()
 
+ const [isLoading, setIsLoading] = useState(false)
+  const [imageFile, setImageFile] = useState(null)
+  const [image, setImage] = useState(null)
+console.log(imageFile)
+ 
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+   setImageFile(file)
+    }
+  };
+  
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -30,20 +44,31 @@ export default function Registration() {
   const stepper = useStep()
 
   const onSubmit = async (formData) => {
+    setIsLoading(true)
+    const response = await fetch(
+      `/api/avatar/upload?filename=${imageFile.name}`,
+      {
+        method: 'POST',
+        body: imageFile,
+      },
+    );
+    const blob = await response.json()
+    console.log('ici blob', blob.url)
 
-    const formDataToSend = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataToSend.append(key, value);
-    });
-    if (imageInputRef.current?.files[0]) {
-      formDataToSend.append('image', imageInputRef.current.files[0]);
+    const formDataWithImage = {
+      ...formData,
+      image: blob.url || null
     }
-
-    try {
+    
+    try {  
       const res = await fetch('api/register', {
         method: 'POST',
-        body: formDataToSend
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(formDataWithImage)
       })
+    
       if (!res.ok) {
         throw new Error('Erreur lors de l\'inscription')
       }
@@ -56,8 +81,10 @@ export default function Registration() {
           password,
           callbackUrl: '/'
         })
+        setIsLoading(false)
       }
     } catch (error) {
+      setIsLoading(false)
       console.log('Erreur: ', error)
     }
   }
@@ -111,10 +138,10 @@ export default function Registration() {
               <div className="flex flex-col items-center justify-center  gap-8 h-full py-12 rounded-lg mt-8  transition duration-300 ">
 
                 <Label className="text-lg font-normal" htmlFor="picture">Ajoutez une photo de profil!</Label>
-                <Input ref={imageInputRef} {...register('image')} className="focus:outline-none cursor-pointer" id="picture" type="file" name='image' />
+                <Input {...register('image')} onChange={handleFileChange} className="focus:outline-none cursor-pointer"  id="picture" type="file" name='image' />
                 <div className="flex justify-center gap-12 items-center">
                   <Button variant='ghost' className='border-2 border-neutral-600' onClick={() => stepper.prevStep()}>Précédent</Button>
-                  <Button onClick={() => stepper.nextStep()}>Suivant</Button>
+                  <Button onClick={() =>stepper.nextStep() }>Suivant</Button>
                 </div>
 
               </div>
@@ -128,7 +155,15 @@ export default function Registration() {
                 <Textarea {...register('bio')} className="w-full h-[10rem]" placeholder='Bio...' name='bio' />
                 <div className="flex justify-center gap-12 items-center">
                   <Button variant='ghost' className='border-2 border-neutral-600 text-md' onClick={() => stepper.prevStep()}>Précédent</Button>
-                  <ButtonSubmitForm type='submit' className=' text-md dark:bg-foreground-secondary '>Je soumets!</ButtonSubmitForm>
+                  <ButtonSubmitForm type='submit' disabled={isLoading} className=' text-md dark:bg-foreground-secondary disabled:opacity-30 '>
+                    {
+                      isLoading && (
+                       
+                        <span> <Loader2 className="h-6 w-4 animate-spin" />Je soumets!</span>
+                      )
+                    }
+                    Je soumets!
+                    </ButtonSubmitForm>
                 </div>
               </div>
             )

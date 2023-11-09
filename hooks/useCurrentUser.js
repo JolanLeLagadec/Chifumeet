@@ -12,6 +12,7 @@ export const useCurrentUser = async () => {
              email: userEmail
             },
             select: {
+                id: true,
                 hashedPassword: false,
                 image: true,
                 name: true,
