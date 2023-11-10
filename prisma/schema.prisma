@@ -27,7 +27,7 @@ model User {
   participation Participation[]
   notifications Notification[]
   Ranking       Ranking?
-  Location      Location[]
+  Location      Location?
 }
 
 model Participation {

@@ -6,12 +6,18 @@ export async function PATCH(req){
     if(req.method !== 'PATCH'){
         return Response.error().json({message: 'Method not allowed'})
     }
-    const { latitude, longitude, userId} = req.body
+    const body = await req.json()
+    
+    const { latitude, longitude, userId} = body
+    console.log('ici deuxieme userId', userId)
+    console.log('ici lat', latitude)
+    console.log('ici long', longitude)
     try {
         await prisma.user.update({
         where: {
             id: userId,
-            data:{
+        },
+            data: {
                 Location: {
                     update: {
                         latitude,
@@ -19,7 +25,6 @@ export async function PATCH(req){
                     }                
                 }
             }        
-        }
     })
     return Response.json({message: 'Update effectuée avec succès'})
 }catch(e){

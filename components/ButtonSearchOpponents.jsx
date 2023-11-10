@@ -1,77 +1,80 @@
 'use client'
 import React from 'react'
 import { Button } from './ui/button'
-import { useTransition } from 'react'
-import { findUsersTwoKms } from '@/lib/geoloc/findUsers'
 import { Loader2 } from 'lucide-react'
 import {useState} from 'react'
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import useLocation from '@/hooks/useLocation'
 
 export default function ButtonSearchOpponents({ user }) {
-  const [isPending, startTransition] = useTransition()
+  
   const [isLoading, setIsLoading] = useState(false)
   const [latitude, setLatitude] = useState('')
   const [longitude, setLongitude] = useState('')
+  const loc = useLocation()
   const router = useRouter()
 
-  const { id: userId } = user
+  const userId = user ? user.id : null
 
-  console.log(userId)
-
-  const handleClick = async () => {
-    if(userId){ 
-        const users = await findUsersTwoKms(latitude, longitude, userId)
-        if(users){
-            router.push('/results')
-        }
-  }else{
-    router.push('/login')
-  }
-}
+  console.log('ici userid', userId)
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(async (position) => {
-      const { latitude, longitude } = position.coords
-      setLatitude(latitude)
-      setLongitude(longitude)
-      try {
-        setIsLoading(true)
-        const res = await fetch('/api/position', {
-          method: 'PATCH',
-          headers: {
-            'Content-type': 'application/json'
-          },
-          body: JSON.stringify({
-            latitude,
-            longitude,
-            userId
-          })
-        })
-        if (!res.ok) {
-          throw Error('Echec de la mise à jour de la position')
-        }
-        if(res.ok){
-          console.log('Position mise à jour')
-        }  
-      } catch (error) {
-        console.error('Erreur lors de la mise à jour de la position', error)
+    if(userId){
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        const { latitude, longitude } = position.coords
+        setLatitude(latitude)
+        setLongitude(longitude)
+        loc.setLocation(latitude, longitude)
+      }, (error) => {
+        console.error('Erreur lors de l\'obtention de la position', error)
         setIsLoading(false)
-      }
-    }, (error) => {
-      console.error('Erreur lors de l\'obtention de la position', error)
-      setIsLoading(false)
-    })
-  }, [userId])
+      }, { enableHighAccuracy: true })
+    }
+   
+  }, [userId, loc])
   return (
     <>
     <Button
-      onClick={handleClick}  
+      onClick={ async () => {
+        if(!userId){
+          router.push('/login')
+          return;
+        }
+        try {
+          setIsLoading(true)
+          console.log(JSON.stringify({ latitude, longitude, userId }))
+          const res = await fetch('/api/position', {
+            method: 'PATCH',
+            headers: {
+              'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+              latitude,
+              longitude,
+              userId
+            })
+          })
+          const response = await res.json()
+          console.log(response)
+          setIsLoading(false)
+          if (!res.ok) {
+            throw Error('Echec de la mise à jour de la position')         
+          }
+          if(res.ok){
+            console.log('Position mise à jour')    
+          }  
+        } catch (error) {
+          console.error('Erreur lors de la mise à jour de la position', error)
+          setIsLoading(false)
+        }
+        router.push('/results')
+      }}  
       size='xl'
-      disabled={isPending}
+      disabled={isLoading}
       className='bg-gradient-to-r disabled:opacity-20 from-primary to-blue-800 dark:to-slate-300 text-transparent bg-clip-text p-6 text-3xl border-2 border-blue-400 rounded-2xl shadow-2xl dark:shadow-neutral-900 font-semibold  transition tracking-widest '>
       {
-        isPending && (
+        isLoading && (
           <Loader2 className="mr-2 h-6 w-6 animate-spin " />
         )
       }

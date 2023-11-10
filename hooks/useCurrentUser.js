@@ -18,7 +18,8 @@ export const useCurrentUser = async () => {
                 name: true,
                 email: true,
                 bio: true,
-                age: true
+                age: true,
+                Location: true
             }
         })
         return currentUser

@@ -12,7 +12,7 @@ export default function SidebarMenu() {
 
   return (
     <div className={`${sidebarMenu.isOpen ? 'translate-x-0' : '-translate-x-full'}  ${sidebarClass} `}>
-      <div className='h-[60vh] flex mt-32 px-12  '>
+      <div className='min-h-[80vh] flex mt-32 px-12  '>
         <ul className='flex flex-col text-4xl space-y-12 mr-24'>
           <li className='cursor-pointer hover:opacity-60'>Duels</li>
           <li className='cursor-pointer hover:opacity-60'>Classement</li>

@@ -17,9 +17,10 @@ export default function Registration() {
 
   const { register, setValue, formState: { errors }, handleSubmit } = useForm();
 
- const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [imageFile, setImageFile] = useState(null)
-  const [image, setImage] = useState(null)
+  
+
 console.log(imageFile)
  
 
@@ -30,7 +31,6 @@ console.log(imageFile)
     }
   };
   
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       setValue('latitude', position.coords.latitude)
@@ -45,19 +45,27 @@ console.log(imageFile)
 
   const onSubmit = async (formData) => {
     setIsLoading(true)
-    const response = await fetch(
-      `/api/avatar/upload?filename=${imageFile.name}`,
-      {
-        method: 'POST',
-        body: imageFile,
-      },
-    );
-    const blob = await response.json()
-    console.log('ici blob', blob.url)
 
+    let response;
+    if(imageFile){
+     response = await fetch(
+        `/api/avatar/upload?filename=${imageFile.name}`,
+        {
+          method: 'POST',
+          body: imageFile,
+        },
+      );
+    }
+    let blob;
+
+    if(response){
+      blob = await response.json()
+      console.log('ici blob', blob.url)
+    }
+  
     const formDataWithImage = {
       ...formData,
-      image: blob.url || null
+      image: blob?.url || null
     }
     
     try {  
@@ -80,9 +88,8 @@ console.log(imageFile)
           email,
           password,
           callbackUrl: '/'
-        })
-        setIsLoading(false)
-      }
+        })   
+      }setIsLoading(false)
     } catch (error) {
       setIsLoading(false)
       console.log('Erreur: ', error)
