@@ -20,7 +20,7 @@ export default async function Result() {
   return (
     <div>
       <Header label='ADVERSAIRES.' />
-      <Carousel data={usersFound} />
+      <Carousel currentUserId={currentUser.id} data={usersFound} />
              
     </div>
   )

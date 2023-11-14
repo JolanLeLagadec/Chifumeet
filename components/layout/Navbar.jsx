@@ -6,9 +6,16 @@ import { Button } from '../ui/button'
 import Link from 'next/link'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { ModeToggle } from '../ui/toggle-dark'
+import { fetchUserNotifs } from '@/app/notifications/fetchUserNotifs'
 
 export default async function Navbar() {
+    
     const user = await useCurrentUser()
+    const notifs = user ? await fetchUserNotifs(user.id) : null
+
+    const notifsCount = notifs ? notifs.length : null
+    console.log('ici compte', notifsCount)
+    console.log(notifs)
     console.log(user)
 
 
@@ -33,7 +40,9 @@ export default async function Navbar() {
                     }
                     {
                         user && (
-                            <div className='rounded-full w-12 h-12 hover:bg-slate-700 transition flex justify-center items-center'>
+                            <div className='rounded-full w-12 h-12 hover:bg-slate-200 dark:hover:bg-slate-700 transition flex justify-center items-center relative'>
+                                <Link href="/notifications">
+                                <div className='absolute top-0 right-0 text-xl'>{notifsCount}</div>
                                 <Image
                                     className='cursor-pointer dark:invert '
                                     src={bell}
@@ -41,6 +50,7 @@ export default async function Navbar() {
                                     height={150}
                                     alt="hamb"
                                 />
+                                </Link>
                             </div>
                         )
                     }

@@ -1,5 +1,5 @@
 import Header from '@/components/Header'
-import Registration from '@/components/RegisterForm'
+import Registration from '@/app/(user)/register/RegisterForm'
 
 
 export default function Register() {

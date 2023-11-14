@@ -31,6 +31,7 @@ model User {
 }
 
 model Participation {
+
   id        Int      @unique @default(autoincrement())
   userId    Int
   duelId    Int
@@ -42,10 +43,13 @@ model Participation {
   Duel Duel @relation(fields: [duelId], references: [id])
 }
 
+
+
 model Duel {
+  
   id         Int      @unique @default(autoincrement())
-  userWonId  Int
-  userLostId Int
+  userWonId  Int?
+  userLostId Int?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 

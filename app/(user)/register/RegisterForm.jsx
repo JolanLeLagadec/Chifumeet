@@ -1,16 +1,16 @@
 'use client' // enhancement
 
 import useStep from "@/hooks/useStep"
-import { Input } from "./ui/input"
-import { Label } from "./ui/label"
-import { Textarea } from "./ui/textarea"
-import ButtonSubmitForm from "./ButtonSubmitForm"
+import { Input } from "../../../components/ui/input"
+import { Label } from "../../../components/ui/label"
+import { Textarea } from "../../../components/ui/textarea"
+import ButtonSubmitForm from "../../../components/ButtonSubmitForm"
 import Link from "next/link"
-import { Button } from "./ui/button"
+import { Button } from "../../../components/ui/button"
 import { useForm } from "react-hook-form";
 import { signIn } from 'next-auth/react'
 import { useEffect } from "react"
-import {  useState } from 'react'
+import { useState } from 'react'
 import { Loader2 } from "lucide-react"
 
 export default function Registration() {
@@ -19,18 +19,18 @@ export default function Registration() {
 
   const [isLoading, setIsLoading] = useState(false)
   const [imageFile, setImageFile] = useState(null)
-  
 
-console.log(imageFile)
- 
+
+  console.log(imageFile)
+
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-   setImageFile(file)
+      setImageFile(file)
     }
   };
-  
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       setValue('latitude', position.coords.latitude)
@@ -47,8 +47,8 @@ console.log(imageFile)
     setIsLoading(true)
 
     let response;
-    if(imageFile){
-     response = await fetch(
+    if (imageFile) {
+      response = await fetch(
         `/api/avatar/upload?filename=${imageFile.name}`,
         {
           method: 'POST',
@@ -58,17 +58,17 @@ console.log(imageFile)
     }
     let blob;
 
-    if(response){
+    if (response) {
       blob = await response.json()
       console.log('ici blob', blob.url)
     }
-  
+
     const formDataWithImage = {
       ...formData,
       image: blob?.url || null
     }
-    
-    try {  
+
+    try {
       const res = await fetch('api/register', {
         method: 'POST',
         headers: {
@@ -76,7 +76,7 @@ console.log(imageFile)
         },
         body: JSON.stringify(formDataWithImage)
       })
-    
+
       if (!res.ok) {
         throw new Error('Erreur lors de l\'inscription')
       }
@@ -88,8 +88,8 @@ console.log(imageFile)
           email,
           password,
           callbackUrl: '/'
-        })   
-      }setIsLoading(false)
+        })
+      } setIsLoading(false)
     } catch (error) {
       setIsLoading(false)
       console.log('Erreur: ', error)
@@ -145,10 +145,10 @@ console.log(imageFile)
               <div className="flex flex-col items-center justify-center  gap-8 h-full py-12 rounded-lg mt-8  transition duration-300 ">
 
                 <Label className="text-lg font-normal" htmlFor="picture">Ajoutez une photo de profil!</Label>
-                <Input {...register('image')} onChange={handleFileChange} className="focus:outline-none cursor-pointer"  id="picture" type="file" name='image' />
+                <Input {...register('image')} onChange={handleFileChange} className="focus:outline-none cursor-pointer" id="picture" type="file" name='image' />
                 <div className="flex justify-center gap-12 items-center">
                   <Button variant='ghost' className='border-2 border-neutral-600' onClick={() => stepper.prevStep()}>Précédent</Button>
-                  <Button onClick={() =>stepper.nextStep() }>Suivant</Button>
+                  <Button onClick={() => stepper.nextStep()}>Suivant</Button>
                 </div>
 
               </div>
@@ -165,12 +165,12 @@ console.log(imageFile)
                   <ButtonSubmitForm type='submit' disabled={isLoading} className=' text-md dark:bg-foreground-secondary disabled:opacity-30 '>
                     {
                       isLoading && (
-                       
+
                         <span> <Loader2 className="h-6 w-4 animate-spin" />Je soumets!</span>
                       )
                     }
                     Je soumets!
-                    </ButtonSubmitForm>
+                  </ButtonSubmitForm>
                 </div>
               </div>
             )

@@ -1,13 +1,13 @@
 import React from 'react'
-import LoginForm from '@/components/LoginForm'
+import LoginForm from '@/app/(user)/login/LoginForm'
 
 export default function Login() {
   return (
-    
+
     <main>
       <LoginForm />
     </main>
-        
-    
+
+
   )
 }

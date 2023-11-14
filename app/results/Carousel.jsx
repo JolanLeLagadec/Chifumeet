@@ -3,8 +3,9 @@ import { Swiper, SwiperSlide, Scrollbar } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
 import Opponent from './Opponent';
+import { ArrowBigLeft } from 'lucide-react';
 
-export default function Carousel({ data }) {
+export default function Carousel({ data, currentUserId }) {
   return (
     <Swiper
         modules={Scrollbar}
@@ -17,8 +18,9 @@ export default function Carousel({ data }) {
     {
         data.map((user) => (
             <>
-            <SwiperSlide>
-                <Opponent user={user} />
+            
+            <SwiperSlide key={user.id}>
+                <Opponent currentUserId={currentUserId} user={user} />
             </SwiperSlide>
             </>
         )

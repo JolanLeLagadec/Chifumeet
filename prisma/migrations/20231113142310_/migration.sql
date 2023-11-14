@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Duel" ALTER COLUMN "userWonId" DROP NOT NULL,
+ALTER COLUMN "userLostId" DROP NOT NULL;
