@@ -1,15 +1,39 @@
 'use server'
 
 export async function fetchUserNotifs(currentUserId){
-    const notifs = prisma.notification.findMany({
+    const notifs = await prisma.notification.findMany({
         where: {
             userId: currentUserId
+        },
+        orderBy: {
+            createdAt: 'desc'
+          },
+            include: {
+                Sender: {
+                    select:{
+                        id: true,
+                        name: true   
+                    }                 
+                }
+            }
+          }) 
+    return notifs
+}
+export async function updateNotifs(idsNotifs){
+    await prisma.notification.updateMany({
+        where: {
+            id: {
+                in: idsNotifs
+            }
+        },
+        data: {
+            readed: true
         }
     })
-    return notifs
 }
 
 export async function duelAccepted(){
+
 
 }
 

@@ -4,7 +4,6 @@ import prisma from "@/lib/db/prisma"
 
 export async function handleChallenge( currentUserId, userReceiverId ) {
 
-    console.log(currentUserId, userReceiverId)
     try {
         await prisma.$transaction(async (prisma) => {  
             const createdDuel = await prisma.duel.create({
@@ -18,17 +17,23 @@ export async function handleChallenge( currentUserId, userReceiverId ) {
                     duelId: createdDuel.id, 
                 }
             });
- 
             await prisma.notification.create({
                 data: {
+                    userSenderId: currentUserId,
                     userId: userReceiverId,
-                    type: 'invitation',   
+                    type: 'invitation', 
+                    readed: false
                 }
             });
         });
-
-       
-        
+            await prisma.user.update({
+                where: {
+                    id: userReceiverId
+                },
+                data: {
+                    hasNotification: true 
+                }
+            });     
     } catch (error) {
         console.error("Erreur lors du traitement du défi :", error);
         // Gérer l'erreur comme nécessaire

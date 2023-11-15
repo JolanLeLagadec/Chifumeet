@@ -13,25 +13,25 @@ datasource db {
 model User {
   id Int @unique @default(autoincrement())
 
-  email          String   @unique
-  hashedPassword String
-  name           String
-  age            String
-  image          String?
-  bio            String?
-  note           String?
-  interests      String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  email           String   @unique
+  hashedPassword  String
+  name            String
+  age             String
+  image           String?
+  bio             String?
+  note            String?
+  interests       String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   participation Participation[]
-  notifications Notification[]
   Ranking       Ranking?
   Location      Location?
+  Notification  Notification[]
+  SentNotifications Notification[] @relation("SenderRelation")
 }
 
 model Participation {
-
   id        Int      @unique @default(autoincrement())
   userId    Int
   duelId    Int
@@ -43,10 +43,7 @@ model Participation {
   Duel Duel @relation(fields: [duelId], references: [id])
 }
 
-
-
 model Duel {
-  
   id         Int      @unique @default(autoincrement())
   userWonId  Int?
   userLostId Int?
@@ -82,18 +79,22 @@ model Ranking {
 }
 
 model Notification {
-  id        Int      @unique @default(autoincrement())
-  userId    Int
-  type      String // invitation? acceptation?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  User      User     @relation(fields: [userId], references: [id])
+  id           Int      @unique @default(autoincrement())
+  userId       Int
+  userSenderId Int?
+  readed       Boolean  @default(false)
+  type         String // invitation? acceptation?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  User         User     @relation(fields: [userId], references: [id])
+  Sender       User?    @relation("SenderRelation", fields: [userSenderId], references: [id])
 }
 
 model Chat {
-  id        Int       @unique @default(autoincrement())
-  duelId    Int       @unique
-  matchId   Int       @unique
+  id      Int @unique @default(autoincrement())
+  duelId  Int @unique
+  matchId Int @unique
+
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   Message   Message[]
@@ -114,7 +115,7 @@ model Match {
 
 model Location {
   id        Int      @unique @default(autoincrement())
-  userId    Int?      @unique
+  userId    Int?     @unique
   latitude  Float
   longitude Float
   createdAt DateTime @default(now())

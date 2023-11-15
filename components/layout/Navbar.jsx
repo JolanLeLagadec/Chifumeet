@@ -42,7 +42,7 @@ export default async function Navbar() {
                         user && (
                             <div className='rounded-full w-12 h-12 hover:bg-slate-200 dark:hover:bg-slate-700 transition flex justify-center items-center relative'>
                                 <Link href="/notifications">
-                                <div className='absolute top-0 right-0 text-xl'>{notifsCount}</div>
+                                <div className='absolute top-0 right-0 text-xl text-teal-500'>{notifsCount}</div>
                                 <Image
                                     className='cursor-pointer dark:invert '
                                     src={bell}
