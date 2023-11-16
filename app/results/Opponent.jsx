@@ -3,7 +3,6 @@
 import Image from "next/image"
 import avatar from "../../public/avatar.jpg"
 import { Button } from "@/components/ui/button"
-import { ArrowBigLeft } from 'lucide-react';
 import { handleChallenge } from "./handleChallenge";
 
 

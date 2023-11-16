@@ -10,7 +10,7 @@ export async function fetchUserNotifs(currentUserId){
           },
             include: {
                 Sender: {
-                    select:{
+                    select: {
                         id: true,
                         name: true   
                     }                 
