@@ -9,7 +9,7 @@ import { ModeToggle } from '../ui/toggle-dark'
 import { fetchUserNotifs } from '@/app/notifications/fetchUserNotifs'
 
 export default async function Navbar() {
-    
+
     const user = await useCurrentUser()
     const notifs = user ? await fetchUserNotifs(user.id) : null
 
@@ -42,19 +42,25 @@ export default async function Navbar() {
                         user && (
                             <div className='rounded-full w-12 h-12 hover:bg-slate-200 dark:hover:bg-slate-700 transition flex justify-center items-center relative'>
                                 <Link href="/notifications">
-                                <div className='absolute top-0 right-0 text-xl text-teal-500'>{notifsCount}</div>
-                                <Image
-                                    className='cursor-pointer dark:invert '
-                                    src={bell}
-                                    width={40}
-                                    height={150}
-                                    alt="hamb"
-                                />
+                                    {
+                                        notifsCount !== 0 && (
+                                            <div className='absolute top-0 right-0 text-xl bg-slate-300 rounded-full w-6 h-6 flex justify-center items-center'>
+                                                <span>{notifsCount}</span>
+                                            </div>
+                                        )
+                                    }
+                                    <Image
+                                        className='cursor-pointer dark:invert '
+                                        src={bell}
+                                        width={40}
+                                        height={150}
+                                        alt="bell"
+                                    />
                                 </Link>
                             </div>
                         )
                     }
-                    <div className='rounded-full w-12 h-12 hover:bg-slate-700 transition flex justify-center items-center'>
+                    <div className='rounded-full w-12 h-12 hover:bg-slate-200 dark:hover:bg-slate-700 transition flex justify-center items-center'>
                         <HamburgerMenu user={user} />
                     </div>
                 </div>

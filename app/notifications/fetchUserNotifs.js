@@ -32,11 +32,3 @@ export async function updateNotifs(idsNotifs){
     })
 }
 
-export async function duelAccepted(){
-
-
-}
-
-export async function duelDenied(){
-
-}

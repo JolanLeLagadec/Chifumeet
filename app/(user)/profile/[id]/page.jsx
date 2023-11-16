@@ -4,6 +4,9 @@ import React from 'react'
 import avatar from "../../../../public/avatar.jpg"
 import { Button } from '@/components/ui/button';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
+import { duelAccepted, duelDenied } from './handleDuel';
+import ButtonAccepted from './ButtonAccepted';
+import ButtonDenied from './ButtonDenied';
 
 const getUser =  async (id) => {
   const user = await prisma.user.findUnique({
@@ -13,6 +16,7 @@ const getUser =  async (id) => {
   })
   return user;
 }
+
 
 const checkDuelInvitation =  async (currentId, userSenderId) => { // on restreint l'accès au profil/invitation uniquement à l'utilisateur qui a reçu l'invitation
   const checked = await prisma.notification.findFirst({
@@ -34,8 +38,9 @@ export default async function ProfileDuel({ params }) {
   const imageUrl = user.image
   const currentUser = await useCurrentUser()
   const isAuthorized = await checkDuelInvitation(currentUser.id, userId)
+  
 
-  console.log('ici checking', isAuthorized)
+  console.log('ici checking', isAuthorized.id)
 
 if(!isAuthorized){
   return <div>Accès non autorisé</div>
@@ -63,8 +68,8 @@ if(!isAuthorized){
          </div>
       </div>
       <div className='flex items-center justify-center gap-8 mt-12'>
-        <Button variant=''>J&apos;accepte le duel</Button>
-        <Button variant='outline'>Je refuse</Button>
+       <ButtonAccepted invitId={isAuthorized.id} currentUserId={currentUser.id} senderId={userId} />
+       <ButtonDenied invitId={isAuthorized.id} currentUserId={currentUser.id} />
 
       </div>
     </div>
