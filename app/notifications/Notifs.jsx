@@ -23,10 +23,7 @@ export function Notifs({ className, ...props }) {
   const [notifications, setNotifications] = useState([])
   const { currentUserId } = props
 
-
   const idsNotifs = notifications.map( notif => notif.id)
-
-
 
   useEffect(() => {
     const fetchNotifications = async () => {

@@ -69,8 +69,7 @@ if(!isAuthorized){
       </div>
       <div className='flex items-center justify-center gap-8 mt-12'>
        <ButtonAccepted invitId={isAuthorized.id} currentUserId={currentUser.id} senderId={userId} />
-       <ButtonDenied invitId={isAuthorized.id} currentUserId={currentUser.id} />
-
+       <ButtonDenied invitId={isAuthorized.id}  />
       </div>
     </div>
     </div>

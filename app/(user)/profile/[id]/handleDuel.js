@@ -1,5 +1,6 @@
 'use server'
 import prisma from "@/lib/db/prisma"
+import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
 
@@ -28,16 +29,18 @@ export const duelAccepted = async (currentUserId, userSenderId, invitId) => {
                 id: invitId
             }
         })
-        redirect('/duel')
+        revalidatePath('/notifications')
+        redirect('/duels')
     }
     }
 
-export const duelDenied = async (invitId) => { 
-    console.log(invitId)
-    await prisma.notification.delete({
-        where: {
-            id: invitId
-        }
-    })
-    redirect('/notifications')
+export const duelDenied = async (invitId) => {    
+       const success = await prisma.notification.delete({
+            where: {
+                id: invitId
+            }
+        })
+        revalidatePath('/notifications')
+        return success;
+       
 }

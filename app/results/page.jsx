@@ -1,4 +1,4 @@
-import ButtonSearchOpponents from '@/components/ButtonSearchOpponents'
+
 import Header from '@/components/Header'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { findUsersTwoKms } from '@/lib/geoloc/findUsers'

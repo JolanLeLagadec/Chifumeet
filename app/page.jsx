@@ -1,4 +1,4 @@
-import Image from 'next/image'
+
 import { epilogue, roboto } from './fonts'
 import Header from '@/components/Header'
 import ButtonSearchOpponents from '@/components/ButtonSearchOpponents'
@@ -7,7 +7,6 @@ import { useCurrentUser } from '@/hooks/useCurrentUser'
 
 export default async function Home() {
   const user = await useCurrentUser()
-  console.log('ici user', user)
   return (
     <main className='relative'>
       <Header label='CHIFUMEET.' />

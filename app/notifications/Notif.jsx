@@ -19,11 +19,11 @@ export default async function Notif({ notification }) {
   }, [notification.createdAt])
 
   return (
-      <div className='flex flex-row justify-center gap-4 mt-4 '>
+      <div className='relative flex flex-row justify-center gap-4 mt-4 '>
         {
           !notification.readed &&
           (
-            <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500 " />
+            <span className="absolute -left-2 top-4 h-2 w-2 translate-y-1 rounded-full bg-sky-500 " />
           )
         }
         <div className="">
