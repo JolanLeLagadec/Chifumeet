@@ -44,8 +44,8 @@ export default async function Navbar() {
                                 <Link href="/notifications">
                                     {
                                         notifsCount !== 0 && (
-                                            <div className='absolute top-0 right-0 text-xl bg-slate-300 rounded-full w-6 h-6 flex justify-center items-center'>
-                                                <span>{notifsCount}</span>
+                                            <div className='absolute top-0 right-0 text-xl dark:bg-slate-100 bg-slate-300 rounded-full w-6 h-6 flex justify-center items-center'>
+                                                <span className='dark:text-slate-800'>{notifsCount}</span>
                                             </div>
                                         )
                                     }
@@ -60,7 +60,7 @@ export default async function Navbar() {
                             </div>
                         )
                     }
-                    <div className='rounded-full w-12 h-12 hover:bg-slate-200 dark:hover:bg-slate-700 transition flex justify-center items-center'>
+                    <div className='rounded-full w-12 h-12 dark:hover:bg-slate-700 hover:bg-slate-200  transition flex justify-center items-center'>
                         <HamburgerMenu user={user} />
                     </div>
                 </div>

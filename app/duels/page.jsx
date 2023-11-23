@@ -1,9 +1,7 @@
-
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 import React from 'react'
 import { fetchOponents } from './fetchDuelsOponents'
 import Duel from './Oponent'
-
 
 export default async function Duels() {
 

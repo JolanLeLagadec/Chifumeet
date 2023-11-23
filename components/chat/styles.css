@@ -1,0 +1,11 @@
+/* Masquer la barre de défilement pour les navigateurs Webkit */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Masquer la barre de défilement pour Firefox */
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* pour Internet Explorer, Edge */
+    scrollbar-width: none;  /* pour Firefox */
+  }
+  

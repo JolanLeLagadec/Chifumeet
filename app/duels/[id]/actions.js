@@ -18,8 +18,7 @@ export const fetchParticipations = async (id) => {
             id: true,
             name: true,
             email: true,
-            image: true,
-            
+            image: true,     
           }
         }
       }
@@ -43,7 +42,7 @@ export const updateParticipation = async (id, currentUserId) => {
   }else {
     newStatut = 'finished'
   }
-
+  
   console.log(participation)
   await prisma.participation.update({
     where: {
@@ -53,4 +52,32 @@ export const updateParticipation = async (id, currentUserId) => {
   }) 
   revalidatePath('/duels')
 }
+
+
+export const setResults = async (id, userWonId, userLostId) => {
+
+  const duelId = parseInt(id)
+
+  const duel = await prisma.duel.update({
+    where: {
+      id: duelId
+    },
+    data: {
+      userWonId,
+      userLostId,
+      participation: { updateMany: {
+        where: {
+          duelId: duelId,
+          userId: { in: [userWonId, userLostId]}
+        },
+        data: {
+          statut: 'finished'
+        }
+      }}
+    }
+  })
+
+}
+
+
 

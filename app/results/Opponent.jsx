@@ -4,12 +4,14 @@ import Image from "next/image"
 import avatar from "../../public/avatar.jpg"
 import { Button } from "@/components/ui/button"
 import { handleChallenge } from "./handleChallenge";
+import useChallenge from "@/hooks/useChallenge";
 
 
 export default function Opponent({ user, currentUserId }) {
 
-  console.log('ici les id', user.id, currentUserId)
+  const challenge = useChallenge()
   const imageUrl = user.image
+
   
   return (
     <div className="flex justify-center min-h-screen">
@@ -31,7 +33,11 @@ export default function Opponent({ user, currentUserId }) {
              </div>
              <div className="flex justify-center mt-6 ">
               <Button
-              onClick={() => handleChallenge(currentUserId, user.id)}
+              onClick=
+              {() =>{
+                 handleChallenge(currentUserId, user.id)
+                 challenge.setIdUserChallenged(user.id)
+                }}
               className="shadow-lg border-2 border-blue-500"
               variant='outline' 
               size='lg'>DEFIER</Button>

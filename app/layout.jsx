@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import SidebarMenu from '@/components/layout/SidebarMenu'
 import Footer from '@/components/layout/Footer'
 import { GeistSans, GeistMono } from 'geist/font'
+import ModaleResults from './duels/[id]/ModaleBackground'
 
 
 
@@ -18,12 +19,12 @@ export default function RootLayout({ children }) {
     <html className={`${GeistSans.variable} ${GeistMono.variable}`} lang="en">
       <body className={roboto.className}>
         <ThemeProvider attribute="class" defaultTheme="system">
-          <Navbar />       
+          <Navbar />
           <main className='relative dark:bg-gradient-to-b from-background to-slate-900'>
             <SidebarMenu />
-            {children}   
-          </main> 
-          <Footer />    
+            {children}
+          </main>
+          <Footer />
         </ThemeProvider>
 
       </body>

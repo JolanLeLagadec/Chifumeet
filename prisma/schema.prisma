@@ -13,22 +13,22 @@ datasource db {
 model User {
   id Int @unique @default(autoincrement())
 
-  email           String   @unique
-  hashedPassword  String
-  name            String
-  age             String
-  image           String?
-  bio             String?
-  note            String?
-  interests       String?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  email          String   @unique
+  hashedPassword String
+  name           String
+  age            String
+  image          String?
+  bio            String?
+  note           String?
+  interests      String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
-  participation Participation[]
-  Ranking       Ranking?
-  Location      Location?
-  Notification  Notification[]
-  SentNotifications Notification[] @relation("SenderRelation")
+  participation     Participation[]
+  Ranking           Ranking?
+  Location          Location?
+  Notification      Notification[]
+  SentNotifications Notification[]  @relation("SenderRelation")
 }
 
 model Participation {
@@ -91,19 +91,20 @@ model Notification {
 }
 
 model Chat {
-  id      Int @unique @default(autoincrement())
-  duelId  Int @unique
-  matchId Int @unique
+  id      Int  @unique @default(autoincrement())
+  duelId  Int  @unique
+  matchId Int? @unique
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   Message   Message[]
 
   Duel  Duel  @relation(fields: [duelId], references: [id])
-  Match Match @relation(fields: [matchId], references: [id])
+  Match Match? @relation(fields: [matchId], references: [id])
 }
 
 model Match {
+
   id      Int @unique @default(autoincrement())
   user1Id Int
   user2Id Int

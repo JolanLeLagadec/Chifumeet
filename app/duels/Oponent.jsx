@@ -10,6 +10,7 @@ export default async function Oponent({ oponent, currentUserId }) {
   const imageUrl = oponent.image
   const duel = await fetchDuel(currentUserId, oponent.id)
 
+
   return (
     <div className='w-full '>
       <div className='flex justify-center items-center gap-6 p-4 border-b-2 border-blue-500 border-opacity-40 py-12' >
@@ -21,7 +22,17 @@ export default async function Oponent({ oponent, currentUserId }) {
           className='rounded-full object-cover '
         />
         <h1 className='text-2xl font-bold'>{oponent.name}</h1>
-        <Link href={`/duels/${duel.duelId}`}> <Button variant='secondary' size='lg' className=' ml-8'>GO</Button></Link>
+        {
+          duel.statut !== 'finished' && (
+            <Link href={`/duels/${duel.duelId}`}> <Button variant='secondary' size='lg' className=' ml-8'>GO</Button></Link>
+          )
+        }   
+        <span>
+          {
+            duel.statut === 'finished' ?
+            'Terminé' : 'En cours'
+          }
+          </span>
 
       </div>
     </div>

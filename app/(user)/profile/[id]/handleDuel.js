@@ -6,8 +6,13 @@ import { redirect } from "next/navigation"
 
 export const duelAccepted = async (currentUserId, userSenderId, invitId) => {
     const duel = await prisma.duel.create({
-        data: {},
+        data: {
+            Chat: {
+                create: {}
+            }
+        },
     })
+ 
 
     if(duel){
         await prisma.participation.create({
