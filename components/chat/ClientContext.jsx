@@ -10,7 +10,7 @@ export default function ClientContext({ children }) {
         return
     }
   return (
-    <div>
+    <div className="flex items-center">
         {children}
     </div>
   )

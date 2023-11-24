@@ -35,6 +35,7 @@ export const duelAccepted = async (currentUserId, userSenderId, invitId) => {
             }
         })
         revalidatePath('/notifications')
+        revalidatePath('/duels')
         redirect('/duels')
     }
     }

@@ -30,7 +30,7 @@ const Messages = ({ initialMessages, chatId, currentUser, oponent }) => {
     pusherClient.bind('incoming-message', (content
     ) => {
       const msg = { content, userSendingId: currentUser.id, userReceiverId: oponent.id }
-      console.log(msg)
+      
       setIncomingMessages((prev) => [...prev, msg])
     })
 
@@ -45,7 +45,7 @@ const Messages = ({ initialMessages, chatId, currentUser, oponent }) => {
 
   return (
     <div className=''>
-      <X color="#FFFF" onClick={() => chat.setIsOpen()} className='cursor-pointer flex items-end w-46 ' />
+      <X color="#FFFF" onClick={() => chat.setIsOpen()} className='cursor-pointer flex items-end w-46  ' />
       <div ref={messagesContainerRef} className='z-50 hide-scrollbar gap-3 overflow-y-auto max-h-[500px] min-h-[500px]'>
       {initialMessages.map((message, i) => (
              <div  className='gap-3 overflow-y-auto max-h-[500px]' key={i}>

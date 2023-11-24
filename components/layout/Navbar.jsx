@@ -14,11 +14,7 @@ export default async function Navbar() {
     const notifs = user ? await fetchUserNotifs(user.id) : null
 
     const notifsCount = notifs ? notifs.length : null
-    console.log('ici compte', notifsCount)
-    console.log(notifs)
-    console.log(user)
-
-
+  
     return (
         <nav className='bg-background'>
             <div className="flex flex-row justify-between py-4 px-6 ">

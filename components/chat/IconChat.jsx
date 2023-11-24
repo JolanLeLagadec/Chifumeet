@@ -13,7 +13,7 @@ export default function IconChat({ children }) {
       chat.setIsOpen()
     } }>
       <Button size='sm' className="absolute z-10 flex" variant='outline'>
-      <Mail className='cursor-pointer  z-40  w-6 h-6 ' />   
+      <Mail className='cursor-pointer w-6 h-6 ' />   
       </Button>  
       {children}
       </div>

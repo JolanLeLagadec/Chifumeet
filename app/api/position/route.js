@@ -9,9 +9,6 @@ export async function PATCH(req){
     const body = await req.json()
     
     const { latitude, longitude, userId} = body
-    console.log('ici deuxieme userId', userId)
-    console.log('ici lat', latitude)
-    console.log('ici long', longitude)
     try {
         await prisma.user.update({
         where: {

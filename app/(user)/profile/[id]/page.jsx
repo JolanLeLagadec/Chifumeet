@@ -40,8 +40,6 @@ export default async function ProfileDuel({ params }) {
   const isAuthorized = await checkDuelInvitation(currentUser.id, userId)
   
 
-  console.log('ici checking', isAuthorized.id)
-
 if(!isAuthorized){
   return <div>Accès non autorisé</div>
 }

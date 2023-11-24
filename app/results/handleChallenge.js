@@ -16,11 +16,9 @@ export async function challengeAlreadyExists(currentUserId, usersIds){
         select: {
             userId: true
         }
-
     })
     return verifiedIds
 }
-
 
      export async function duelAlreadyStarted(currentUserId, usersIds){
     
@@ -34,9 +32,9 @@ export async function challengeAlreadyExists(currentUserId, usersIds){
                 userId: true
             }
         })
-        console.log(participations)
-        const duelIdsCurrent = participations.map(duel => duel.id)
-
+        
+        const duelIdsCurrent = participations.map(duel => duel.duelId)
+        
         const otherParticipations = await prisma.participation.findMany({
             where: {
                 userId: { in: usersIds},

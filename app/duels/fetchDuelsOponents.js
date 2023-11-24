@@ -17,7 +17,8 @@ export async function fetchOponents( currentUserId ){
         const userOponentIds = await prisma.participation.findMany({ // On récupère les idUsers qui ont le même id de duel, on exclut le current
             where: {
                 userId: {not: currentUserId},
-                duelId: {in: duelsIds}    
+                duelId: {in: duelsIds}, 
+                statut: {not: 'finished'}  
             },
             select: {
                 userId: true,
@@ -25,7 +26,7 @@ export async function fetchOponents( currentUserId ){
         })
     
     const userIds = userOponentIds.map(u => u.userId) // On les rentre dans un nouveau tableau
-    console.log(userIds)
+    
 
     if(!userIds.length){
         return []
@@ -64,7 +65,8 @@ export const fetchDuel = async (currentUserId, oponentId) => {
         where: {
             AND: [
                 {duelId: {in: duelsIds}},
-                {userId: oponentId}
+                {userId: oponentId},
+                {statut: {not: 'finished'}}
             ]      
         }, 
         select: {
@@ -72,6 +74,7 @@ export const fetchDuel = async (currentUserId, oponentId) => {
             statut: true
         }
     })
+    
 
     return duelWithOponent
 }

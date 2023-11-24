@@ -18,7 +18,7 @@ export default function SidebarMenu() {
          <Link onClick={() => sidebarMenu.setIsOpen()} href="/duels"><li className='cursor-pointer hover:opacity-60'>Duels</li></Link> 
          <Link onClick={() => sidebarMenu.setIsOpen()} href="/ranking"><li className='cursor-pointer hover:opacity-60'>Classement</li></Link> 
          <Link onClick={() => sidebarMenu.setIsOpen()} href="/notifications"><li className='cursor-pointer hover:opacity-60'>Notifications</li></Link>
-         <li className='cursor-pointer hover:opacity-60'>Historique</li>
+          <Link onClick={() => sidebarMenu.setIsOpen()} href='/historique'> <li className='cursor-pointer hover:opacity-60'>Historique</li></Link>
          <li className='cursor-pointer hover:opacity-60'>Mon profil</li>
           <li onClick={() => signOut({callbackUrl: '/'})} className='cursor-pointer hover:opacity-60'>Déconnexion</li>
         </ul>

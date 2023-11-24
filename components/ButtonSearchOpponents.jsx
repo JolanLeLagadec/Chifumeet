@@ -17,8 +17,6 @@ export default function ButtonSearchOpponents({ user }) {
 
   const userId = user ? user.id : null
 
-  console.log('ici userid', userId)
-
   useEffect(() => {
     if(userId){
       navigator.geolocation.getCurrentPosition(async (position) => {
@@ -43,7 +41,7 @@ export default function ButtonSearchOpponents({ user }) {
         }
         try {
           setIsLoading(true)
-          console.log(JSON.stringify({ latitude, longitude, userId }))
+         
           const res = await fetch('/api/position', {
             method: 'PATCH',
             headers: {
@@ -56,7 +54,7 @@ export default function ButtonSearchOpponents({ user }) {
             })
           })
           const response = await res.json()
-          console.log(response)
+          
           setIsLoading(false)
           if (!res.ok) {
             throw Error('Echec de la mise à jour de la position')         

@@ -31,8 +31,9 @@ export default async function Duel({ params }) {
     return <div>Accès non autorisé</div>
   }
   return (
-    <main className="relative z-0">
+    <main className=" relative z-0">
       <div className=' flex justify-evenly items-center '>
+        
         <ClientContext>
           <Chat duelId={id} currentUserId={currentUser.id} opoId={participationOponent.User.id} />
         </ClientContext>

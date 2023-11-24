@@ -9,7 +9,6 @@ import prisma from '@/lib/db/prisma';
 export default async function Notif({ notification }) {
 
   const { Sender } = notification
-  console.log(Sender?.id)
 
   const createdAt = useMemo(() => {
     if (!notification?.createdAt) {

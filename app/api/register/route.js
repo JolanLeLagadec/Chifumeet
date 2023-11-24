@@ -5,7 +5,7 @@ import prisma from "@/lib/db/prisma";
 export async function POST(req){
     
     const body = await req.json()
-    console.log('Requête reçue:', body)
+   
 
     const {email, password, name, age, image, bio, latitude, longitude} = body
       const existingUser = await prisma.user.findUnique({ where: { email } });
@@ -13,9 +13,7 @@ export async function POST(req){
        return Response.json({ message: 'Email already in use' });
       }
       const hashedPassword = await bcrypt.hash(password, 12)
-
-      console.log('ici img register', image)
-
+      
       const imageString = image ? JSON.stringify(image) : null
 
       try {
@@ -36,7 +34,7 @@ export async function POST(req){
               
             }
             })
-            console.log('Nouvel utilisateur créé:', newUser)
+           
            return Response.json({ message: 'Registration successful' });
 
       }catch(error){

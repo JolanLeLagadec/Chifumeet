@@ -26,7 +26,7 @@ export default function ModaleResults({ pUser, pOponent, duelId}) {
     setIsLoading(true)
     await setResults(duelId, userWonId, userLostId)
     setIsLoading(false)
-    router.push('/duels')
+    router.push('/historique')
 
   }
 

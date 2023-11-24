@@ -20,10 +20,6 @@ export default function Registration() {
   const [isLoading, setIsLoading] = useState(false)
   const [imageFile, setImageFile] = useState(null)
 
-
-  console.log(imageFile)
-
-
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -60,7 +56,7 @@ export default function Registration() {
 
     if (response) {
       blob = await response.json()
-      console.log('ici blob', blob.url)
+   
     }
 
     const formDataWithImage = {
@@ -81,7 +77,7 @@ export default function Registration() {
         throw new Error('Erreur lors de l\'inscription')
       }
       const data = await res.json()
-      console.log(data)
+   
       if (res.ok) {
         const { email, password } = formData
         signIn('credentials', {

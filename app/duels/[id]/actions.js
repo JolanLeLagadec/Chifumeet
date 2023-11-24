@@ -43,7 +43,7 @@ export const updateParticipation = async (id, currentUserId) => {
     newStatut = 'finished'
   }
   
-  console.log(participation)
+ 
   await prisma.participation.update({
     where: {
       id: participation.id

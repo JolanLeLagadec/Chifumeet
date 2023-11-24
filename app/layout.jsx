@@ -5,7 +5,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import SidebarMenu from '@/components/layout/SidebarMenu'
 import Footer from '@/components/layout/Footer'
 import { GeistSans, GeistMono } from 'geist/font'
-import ModaleResults from './duels/[id]/ModaleBackground'
+import toast, { Toaster } from 'react-hot-toast'
 
 
 
@@ -18,6 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html className={`${GeistSans.variable} ${GeistMono.variable}`} lang="en">
       <body className={roboto.className}>
+        <Toaster />
         <ThemeProvider attribute="class" defaultTheme="system">
           <Navbar />
           <main className='relative dark:bg-gradient-to-b from-background to-slate-900'>

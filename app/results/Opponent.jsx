@@ -5,12 +5,14 @@ import avatar from "../../public/avatar.jpg"
 import { Button } from "@/components/ui/button"
 import { handleChallenge } from "./handleChallenge";
 import useChallenge from "@/hooks/useChallenge";
+import { toast } from 'react-hot-toast';
 
 
 export default function Opponent({ user, currentUserId }) {
 
   const challenge = useChallenge()
   const imageUrl = user.image
+ 
 
   
   return (
@@ -37,6 +39,7 @@ export default function Opponent({ user, currentUserId }) {
               {() =>{
                  handleChallenge(currentUserId, user.id)
                  challenge.setIdUserChallenged(user.id)
+                 toast.success('Défi envoyé!')
                 }}
               className="shadow-lg border-2 border-blue-500"
               variant='outline' 

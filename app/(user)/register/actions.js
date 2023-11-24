@@ -11,7 +11,7 @@ export const formAction = async (formData) => {
     const age = formData.get('age')?.toString()
     const bio = formData.get('bio')?.toString()
 
-    console.log(name, password, email)
+
   
     if(!name || !password || !email ){
       throw Error('Fields missing')
