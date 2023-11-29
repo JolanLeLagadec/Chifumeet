@@ -42,7 +42,7 @@ export default async function Duel({ params }) {
         <ModaleResults pUser={participationCurrentUser} pOponent={participationOponent} duelId={id} />
         <div className='flex flex-col justify-center items-center gap-5'>
           <Image
-            src={participationCurrentUser.User.image.replace(/^"(.+(?="$))"$/, '$1') || avatar}
+            src={participationCurrentUser?.User?.image?.replace(/^"(.+(?="$))"$/, '$1') || avatar}
             height={160}
             width={160}
             alt={participationCurrentUser.User.name}
@@ -55,7 +55,7 @@ export default async function Duel({ params }) {
         <IconChat>
           <div className='flex flex-col justify-center items-center gap-5 relative group cursor-pointer'>
             <Image
-              src={participationOponent.User.image.replace(/^"(.+(?="$))"$/, '$1') || avatar}
+              src={participationOponent?.User?.image?.replace(/^"(.+(?="$))"$/, '$1') || avatar}
               height={160}
               width={160}
               alt={participationOponent.User.name}
@@ -68,7 +68,6 @@ export default async function Duel({ params }) {
 
       <div className="flex  items-center justify-center py-6 gap-4 ">
         <ButtonHandleDuel duelId={id} currentUserId={currentUser.id} statut={statut} oponentStatut={participationOponent.statut} />
-
       </div>
     </main>
   )

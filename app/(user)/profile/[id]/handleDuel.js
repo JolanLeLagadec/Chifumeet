@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
 
+
 export const duelAccepted = async (currentUserId, userSenderId, invitId) => {
     const duel = await prisma.duel.create({
         data: {
@@ -13,7 +14,6 @@ export const duelAccepted = async (currentUserId, userSenderId, invitId) => {
         },
     })
  
-
     if(duel){
         await prisma.participation.create({
             data: {
@@ -29,9 +29,40 @@ export const duelAccepted = async (currentUserId, userSenderId, invitId) => {
                 statut: 'accepted'
             }
         })
+
+        await prisma.ranking.upsert({
+            where: { userId: currentUserId },
+            update: {},
+            create: {
+              userId: currentUserId,
+              rank: 'Débutant',
+              score: 0,
+            },
+          });
+          
+          await prisma.ranking.upsert({
+            where: { userId: userSenderId },
+            update: {},
+            create: {
+              userId: userSenderId,
+              rank: 'Débutant',
+              score: 0,
+            },
+          });
+
+        
+
         await prisma.notification.delete({
             where: {
                 id: invitId
+            }
+        })
+        await prisma.notification.create({
+            data: {
+                userId: userSenderId,
+                type: 'accepted',
+                userSenderId: currentUserId,
+                readed: false
             }
         })
         revalidatePath('/notifications')

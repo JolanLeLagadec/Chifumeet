@@ -16,7 +16,7 @@ export default function SidebarMenu() {
       <div className='min-h-[80vh] flex mt-32 px-12  '>
         <ul className='flex flex-col text-4xl space-y-12 mr-24'>
          <Link onClick={() => sidebarMenu.setIsOpen()} href="/duels"><li className='cursor-pointer hover:opacity-60'>Duels</li></Link> 
-         <Link onClick={() => sidebarMenu.setIsOpen()} href="/ranking"><li className='cursor-pointer hover:opacity-60'>Classement</li></Link> 
+         <Link onClick={() => sidebarMenu.setIsOpen()} href="/classement"><li className='cursor-pointer hover:opacity-60'>Classement</li></Link> 
          <Link onClick={() => sidebarMenu.setIsOpen()} href="/notifications"><li className='cursor-pointer hover:opacity-60'>Notifications</li></Link>
           <Link onClick={() => sidebarMenu.setIsOpen()} href='/historique'> <li className='cursor-pointer hover:opacity-60'>Historique</li></Link>
          <li className='cursor-pointer hover:opacity-60'>Mon profil</li>

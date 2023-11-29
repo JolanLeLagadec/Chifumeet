@@ -7,8 +7,6 @@ export default async function Duels() {
 
   const currentUser = await useCurrentUser()
   const oponents = await fetchOponents(currentUser?.id)
-  console.log(oponents)
-  
 
   if(!currentUser){
     return <div>Accès non autorisé</div>

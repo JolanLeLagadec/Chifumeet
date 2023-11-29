@@ -6,7 +6,6 @@ import { getOpo } from './actions'
 export default async function Duel({ duel, id }) {
 
     const idOpo = duel.userWonId === id ? duel.userLostId : duel.userWonId
-
     const oponent = await getOpo(idOpo)
     
     return (
@@ -16,13 +15,14 @@ export default async function Duel({ duel, id }) {
                 width={100}
                 height={100}
                 alt={oponent.name}
+                className='w-16 rounded-full'
             />
             <span>{oponent.name}</span>
             {
                 duel.userWonId === id ? (
-                    <span>Win</span>
+                    <span className='bg-blue-200 p-3 rounded-full font-semibold dark:text-slate-900'>Win</span>
                 ) : (
-                    <span>Lost</span>
+                    <span className='bg-slate-400 p-3 font-semibold rounded-full dark:text-slate-900'>Lost</span>
                 )
             }
 

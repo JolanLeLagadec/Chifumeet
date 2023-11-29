@@ -19,6 +19,9 @@ export default async function Result() {
   return (
     <div>
       <Header label='ADVERSAIRES.' />
+      <div className='flex justify-center'>
+        <p className='font-sans text-slate-600 dark:text-slate-400 text-lg'>Swipe pour découvrir de potentiels adversaires.</p>
+      </div>
       <Carousel currentUserId={currentUser.id} users={usersFound} />          
     </div>
   )

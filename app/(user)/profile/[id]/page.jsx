@@ -2,9 +2,7 @@ import prisma from '@/lib/db/prisma'
 import Image from 'next/image';
 import React from 'react'
 import avatar from "../../../../public/avatar.jpg"
-import { Button } from '@/components/ui/button';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
-import { duelAccepted, duelDenied } from './handleDuel';
 import ButtonAccepted from './ButtonAccepted';
 import ButtonDenied from './ButtonDenied';
 

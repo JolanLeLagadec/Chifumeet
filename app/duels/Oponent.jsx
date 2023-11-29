@@ -9,9 +9,7 @@ export default async function Oponent({ oponent, currentUserId }) {
 
   const imageUrl = oponent.image
   const duel = oponent ? await fetchDuel(currentUserId, oponent.id) : null
-  console.log(duel)
-
-
+ 
 if(!duel ){
   return <p className='text-2xl font-mono text-center p-8'>Pas de duel en cours !</p>;
 }

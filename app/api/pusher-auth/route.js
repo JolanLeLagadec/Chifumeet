@@ -13,12 +13,10 @@ export async function POST(req) {
     user_id: id,
     user_data: { user_id: id },
   }
-
   const auth = pusherServer.authorizeChannel(
     socketId,
     channelName,
     presenceData
   )
-
   return new Response(JSON.stringify(auth))
 }

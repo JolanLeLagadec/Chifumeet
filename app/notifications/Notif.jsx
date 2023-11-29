@@ -39,11 +39,11 @@ export default async function Notif({ notification }) {
           }
           {
             notification.type === 'accepted' ? (
-              <div className='flex justify-center'>
-                <p className="text-sm font-medium leading-none">
-
+              <div className='flex justify-center items-center gap-4'>
+                <p className="text-sm font-medium leading-none ">
+                {Sender?.name} a accepté le duel
                 </p>
-                <Link href={`/profile/${Sender?.id}`}> <Button variant='outline' className='border-2'>Duel</Button></Link>
+                <Link href={`/duels`}> <Button variant='outline' className='border-2 mt-2'>Duel</Button></Link>
               </div>
 
             ) : ''
