@@ -1,9 +1,11 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import prisma from "@/lib/db/prisma"
 import { getServerSession } from "next-auth"
+import { revalidatePath } from "next/cache"
 
 export const useCurrentUser = async () => {
     const session = await getServerSession(authOptions)
+    console.log(session)
     const userEmail = session?.user?.email
 
     if(userEmail){
@@ -22,6 +24,8 @@ export const useCurrentUser = async () => {
                 Location: true
             }
         })
+        revalidatePath('/')
         return currentUser
+        
     }return null;
 }

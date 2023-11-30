@@ -4,9 +4,9 @@ import { fetchOponents } from './fetchDuelsOponents'
 import Duel from './Oponent'
 
 export default async function Duels() {
-
+  
   const currentUser = await useCurrentUser()
-  const oponents = await fetchOponents(currentUser?.id)
+  const oponents = await fetchOponents(currentUser.id)
 
   if(!currentUser){
     return <div>Accès non autorisé</div>

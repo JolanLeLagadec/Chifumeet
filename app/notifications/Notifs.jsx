@@ -33,7 +33,9 @@ export function Notifs({ className, ...props }) {
     fetchNotifications()
   }, [currentUserId])
 
-  const notifsCount = notifications.length
+  const readedCount = notifications.filter(notif => notif.readed === false)
+ 
+  const notifsCount = readedCount.length 
 
 
   return (

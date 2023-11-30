@@ -1,6 +1,18 @@
 'use server'
 import { revalidatePath } from "next/cache"
 
+export async function notifReaded(id){
+    await prisma.notification.update({
+      where: {
+        id
+      },
+      data: {
+        readed: true
+      }
+    })
+    revalidatePath('/notifications')
+  }
+
 export async function fetchUserNotifs(currentUserId){
     const notifs = await prisma.notification.findMany({
         where: {

@@ -33,15 +33,15 @@ export default function Registration() {
       setValue('longitude', position.coords.longitude)
     }, (error) => {
       console.error('Erreur lors de l\'obtention de la position', error)
+    }, {
+      enableHighAccuracy: true      
     })
-
   }, [setValue])
 
   const stepper = useStep()
 
   const onSubmit = async (formData) => {
     setIsLoading(true)
-
     let response;
     if (imageFile) {
       response = await fetch(
@@ -56,9 +56,7 @@ export default function Registration() {
 
     if (response) {
       blob = await response.json()
-   
     }
-
     const formDataWithImage = {
       ...formData,
       image: blob?.url || null

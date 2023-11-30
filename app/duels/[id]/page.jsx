@@ -17,8 +17,8 @@ export default async function Duel({ params }) {
   const currentUser = await useCurrentUser()
   const participations = await fetchParticipations(id)
 
-  const participationCurrentUser = participations.find(p => p.userId === currentUser.id)
-  const participationOponent = participations.find(p => p.userId !== currentUser.id)
+  const participationCurrentUser = participations.find(p => p.userId === currentUser?.id)
+  const participationOponent = participations.find(p => p.userId !== currentUser?.id)
 
   let statut;
   if (!participationCurrentUser || !participationOponent) {
@@ -27,13 +27,12 @@ export default async function Duel({ params }) {
     statut = participationCurrentUser.statut
   }
 
-  if (!currentUser) {
+  if (!currentUser ) {
     return <div>Accès non autorisé</div>
   }
   return (
     <main className=" relative z-0">
       <div className=' flex justify-evenly items-center '>
-        
         <ClientContext>
           <Chat duelId={id} currentUserId={currentUser.id} opoId={participationOponent.User.id} />
         </ClientContext>

@@ -21,6 +21,7 @@ export default function ButtonSearchOpponents({ user }) {
     if(userId){
       navigator.geolocation.getCurrentPosition(async (position) => {
         const { latitude, longitude } = position.coords
+        console.log(latitude, longitude)
         setLatitude(latitude)
         setLongitude(longitude)
         loc.setLocation(latitude, longitude)
@@ -30,7 +31,7 @@ export default function ButtonSearchOpponents({ user }) {
       }, { enableHighAccuracy: true })
     }
    
-  }, [userId, loc])
+  }, [userId]) // Attention à ne pas introduire loc en dépendance, loc pointe vers la référence du store, ne change donc jamais, ce sont les propriétés longit et lat qui changent..
   return (
     <>
     <Button

@@ -4,6 +4,7 @@ import avatar from "../../public/avatar.jpg"
 import { fetchDuel } from './fetchDuelsOponents'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { Scissors } from 'lucide-react'
 
 export default async function Oponent({ oponent, currentUserId }) {
 
@@ -24,10 +25,10 @@ if(!duel ){
           alt={oponent.name}
           className='rounded-full object-cover '
         />
-        <h1 className='text-2xl font-bold'>{oponent.name}</h1>
+        <h1 className='text-xl font-bold'>{oponent.name}</h1>
         {
            duel.statut !== 'finished' && (
-            <Link href={`/duels/${duel.duelId}`}> <Button variant='secondary' size='lg' className=' ml-8'>GO</Button></Link>
+            <Link href={`/duels/${duel.duelId}`}> <Button variant='secondary' size='lg' className=' ml-8'><Scissors /> GO</Button></Link>
           )
         }   
         <span>

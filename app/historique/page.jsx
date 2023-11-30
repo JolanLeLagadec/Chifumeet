@@ -10,7 +10,7 @@ const user = await useCurrentUser()
 const duels = await getDuels(user?.id)
 
 if(!duels){
-  return <p></p>
+  return <p>Pas de duels en cours</p>
 }
   return (
     <div className="flex justify-center items-center">

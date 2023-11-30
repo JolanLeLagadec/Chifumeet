@@ -17,7 +17,9 @@ export default function Carousel({ users, currentUserId }) {
 
   const idsOpoInvited = opoInvit.map(opo => opo.userId)
   const idsOpoAlreadyInDuel = opoDuel.map(opo => opo.userId)
+
   const usersIds = users.map(u => u.id)
+  
 
 
   useEffect(() => {

@@ -1,5 +1,4 @@
-import { NextResponse, NextRequest } from "next/server";
-import bcrypt from 'bcrypt'
+
 import prisma from "@/lib/db/prisma";
 
 export async function PATCH(req){
@@ -9,6 +8,7 @@ export async function PATCH(req){
     const body = await req.json()
     
     const { latitude, longitude, userId} = body
+   
     try {
         await prisma.user.update({
         where: {

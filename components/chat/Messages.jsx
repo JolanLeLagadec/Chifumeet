@@ -33,7 +33,6 @@ const Messages = ({ initialMessages, chatId, currentUser, oponent }) => {
       
       setIncomingMessages((prev) => [...prev, msg])
     })
-
     return () => {
       pusherClient.unbind('incoming-message');
       pusherClient.unsubscribe(id)
@@ -48,7 +47,7 @@ const Messages = ({ initialMessages, chatId, currentUser, oponent }) => {
       <X color="#FFFF" onClick={() => chat.setIsOpen()} className='cursor-pointer flex items-end w-46  ' />
       <div ref={messagesContainerRef} className='z-50 hide-scrollbar gap-3 overflow-y-auto max-h-[500px] min-h-[500px]'>
       {initialMessages.map((message, i) => (
-             <div  className='gap-3 overflow-y-auto max-h-[500px]' key={i}>
+             <div  className='gap-3 ' key={i}> {/* si index en key premiers messages en double */}
              {
                message.userSendingId === currentUser.id ? (
                    <div className='p-4 flex justify-end '>
@@ -87,6 +86,8 @@ const Messages = ({ initialMessages, chatId, currentUser, oponent }) => {
                   alt={oponent.name}
                   className='rounded-full object-cover'
                    />
+
+
                 </div>
 
             )

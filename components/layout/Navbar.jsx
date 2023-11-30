@@ -13,7 +13,8 @@ export default async function Navbar() {
     const user = await useCurrentUser()
     const notifs = user ? await fetchUserNotifs(user.id) : null
 
-    const notifsCount = notifs ? notifs.length : null
+    const readedCount = notifs?.filter(notif => notif.readed === false)
+    const notifsCount = readedCount?.length 
   
     return (
         <nav className='bg-background'>

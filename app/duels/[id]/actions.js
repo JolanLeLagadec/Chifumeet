@@ -94,12 +94,8 @@ export const setResults = async (id, userWonId, userLostId) => {
     }),
   ]);
   const newScore = userWonRanked?.score + 10;
-  const newScoreUserLost = userLostRanked?.score !== 0 ?  userLostRanked?.score - 5 : 0;
+  const newScoreUserLost = userLostRanked?.score !== 0 ?  userLostRanked?.score - 4 : 0;
 
-  console.log(newScoreUserLost)
-
-  
-  console.log(userLostRanked)
 
   const rankUserLost =
     newScoreUserLost <= 200

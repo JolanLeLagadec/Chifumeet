@@ -14,6 +14,7 @@ export default async function Result() {
   }
 
   const { latitude, longitude } = currentUser.Location
+  
   const usersFound = await findUsersTwoKms(latitude, longitude, currentUser.id)
   
   return (

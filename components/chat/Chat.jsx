@@ -23,7 +23,6 @@ const Chat = async ({ duelId, currentUserId, opoId }) => {
             content: true
         }
     })
-
     const oponent = await prisma.user.findFirst({
         where: {
             id: opoId
@@ -40,7 +39,7 @@ const Chat = async ({ duelId, currentUserId, opoId }) => {
 
     return (
 
-        <div className=' mx-auto  fixed  bg-slate-950 rounded-lg w-1/2 z-50 p-4 inset-0 min-w-[30rem]'>
+        <div className='mx-auto fixed bg-slate-950 rounded-lg w-1/2 z-50 p-4 inset-0 min-w-[28rem]'>
             <div className='flex flex-col w-full gap-3'>
                 <Messages chatId={chat.id} currentUser={currentUser} initialMessages={serializedMessages} oponent={oponent} />
                 <MessageField chatId={chat.id} currentUserId={currentUserId} opoId={opoId} />

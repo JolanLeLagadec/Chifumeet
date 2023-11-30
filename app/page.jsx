@@ -1,13 +1,20 @@
 
-import { epilogue, roboto } from './fonts'
+import { epilogue } from './fonts'
 import Header from '@/components/Header'
 import ButtonSearchOpponents from '@/components/ButtonSearchOpponents'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 
 
+
 export default async function Home() {
+
   const user = await useCurrentUser()
+
+    // Rendu coté serveur,
+  	// n'attend pas currentUser pour rendre le composant
+
   return (
+
     <main className='relative'>
       <Header label='CHIFUMEET.' />
       <div className='p-8 h-full w-full border-t-2 border-cyan-500  '>
@@ -18,6 +25,8 @@ export default async function Home() {
         </div>
       </div>
     </main>
+
+
 
   )
 }

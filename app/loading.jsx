@@ -7,7 +7,6 @@ export default function Loading() {
         <div className='flex justify-center items-center '>
         <Loader2 className="mr-2 h-12 w-12 animate-spin" />        
         </div>
-
     </div>
   )
 }

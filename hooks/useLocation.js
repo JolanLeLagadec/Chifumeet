@@ -6,7 +6,7 @@ const useLocation = create((set) => ({
     setLocation: (lat, long) => {
         set({
             latitude: lat,
-            long: long
+            longitude: long
         })
     }
 }))

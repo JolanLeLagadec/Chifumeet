@@ -8,8 +8,6 @@ export default async function Ranking() {
 
   const ranking = await findUsersRanking()
 
-  console.log(ranking)
-
   const placing = (index) => {
    if(index === 0){
     return <span className='text-xl font-extrabold'>1er</span>
@@ -26,16 +24,15 @@ export default async function Ranking() {
 
   return (
 
-    <div className='bg-slate-200 w-full min-h-screen'>
+    <div className='bg-slate-200 w-full min-h-screen dark:bg-slate-800'>
       <div className='flex justify-center items-center w-full h-full p-8'>
-        <div className=' bg-slate-50 border-2 border-blue-600 rounded-xl w-full'>
+        <div className=' bg-slate-50 border-2 border-blue-600 rounded-xl w-full dark:bg-slate-950'>
           {
             ranking.map(( rank, index ) => (
               <div key={rank.id} className=' w-full border-b-1 border-blue-500 p-4 flex items-center gap-4'>
                 <div className='w-12'>
                 {placing(index)}
-                </div>
-                
+                </div>  
                   <Rank key={rank.id} rank={rank} />
               </div>
               
