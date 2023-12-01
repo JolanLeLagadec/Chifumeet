@@ -6,7 +6,7 @@ import { ModeToggle } from '../ui/toggle-dark'
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 
-export default function SidebarMenu() {
+export default function SidebarMenu({ currentUserId }) {
 
   const sidebarMenu = useSidebar()
   const sidebarClass = 'w-full transition transform ease-in-out duration-300 absolute bg-background z-50 '
@@ -19,7 +19,7 @@ export default function SidebarMenu() {
          <Link onClick={() => sidebarMenu.setIsOpen()} href="/classement"><li className='cursor-pointer hover:opacity-60'>Classement</li></Link> 
          <Link onClick={() => sidebarMenu.setIsOpen()} href="/notifications"><li className='cursor-pointer hover:opacity-60'>Notifications</li></Link>
           <Link onClick={() => sidebarMenu.setIsOpen()} href='/historique'> <li className='cursor-pointer hover:opacity-60'>Historique</li></Link>
-         <li className='cursor-pointer hover:opacity-60'>Mon profil</li>
+          <Link onClick={() => sidebarMenu.setIsOpen()} href='/profile'><li className='cursor-pointer hover:opacity-60'>Mon profil</li></Link>
           <li onClick={() => signOut({callbackUrl: '/'})} className='cursor-pointer hover:opacity-60'>Déconnexion</li>
         </ul>
         <ModeToggle />

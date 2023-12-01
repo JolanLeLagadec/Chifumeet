@@ -34,7 +34,7 @@ export default function Notif({ notification }) {
                 <p className="text-sm font-medium leading-none">
                   {Sender?.name} vous a lancé un duel!
                 </p>
-                <Link href={`/profile/${Sender?.id}`}> <Button variant='outline' className='border-2 mt-2'>Profil</Button></Link>
+                <Link href={`/profile-duel/${Sender?.id}`}> <Button variant='outline' className='border-2 mt-2'>Profil</Button></Link>
               </div>
 
             ) : ''

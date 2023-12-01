@@ -6,9 +6,7 @@ export default function Rank({ rank }) {
     const { User } = rank
     const { rank: grade, score} = rank
 
-    console.log(grade)
-
-    console.log(User)
+  
     return (
         <div className='flex items-center gap-8 w-full'>
             <div className='flex flex-col gap-1 justify-center items-center'>
