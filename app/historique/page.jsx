@@ -1,6 +1,6 @@
 import { useCurrentUser } from "@/hooks/useCurrentUser"
 import { getDuels } from "./actions"
-import Duel from "./Duel"
+import Duel from "./_components/Duel"
 
 
 

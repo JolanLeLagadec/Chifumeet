@@ -1,13 +1,12 @@
 'use client'
 import React from 'react'
-import { Input } from '../../../components/ui/input'
-import ButtonSubmitForm from '../../../components/ButtonSubmitForm'
+import { Input } from '../../../../components/ui/input'
+import ButtonSubmitForm from '../../../../components/ButtonSubmitForm'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { signIn } from 'next-auth/react'
 import { useState } from 'react'
-import { redirect, useRouter } from 'next/navigation'
-import { Loader2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 
 
@@ -27,7 +26,7 @@ export default function LoginForm() {
       password: formData.password,
       redirect: false
     }).then(({ error }) => {
-      if (error) {  
+      if (error) {
         console.log(error)
         setFormError(true)
         toast.error('Les identifiants sont incorrects, veuillez réessayer!')
@@ -35,16 +34,13 @@ export default function LoginForm() {
         setTimeout(() => {
           setFormError(false)
         }, 2000)
-        }
-      else {        
+      }
+      else {
         router.push('/')
         router.refresh()
         setIsLoading(false)
       }
-      
     })
-
-
   }
 
   return (

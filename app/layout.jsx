@@ -17,11 +17,11 @@ export default function RootLayout({ children }) {
 
   return (
     <html className={`${GeistSans.variable} ${GeistMono.variable}`} lang="en">
-      <body className={roboto.className}>
+      <body className={`${roboto.className} max-w-xl mx-auto min-h-screen`}>
         <Toaster />
-        <ThemeProvider attribute="class" defaultTheme="system">
+        <ThemeProvider attribute="class" defaultTheme="dark">
           <Navbar />
-          <main className='relative dark:bg-gradient-to-b from-background to-slate-900'>
+          <main className='relative dark:bg-gradient-to-b from-background to-slate-900 h-full'>
             <SidebarMenu />
             {children}
           </main>

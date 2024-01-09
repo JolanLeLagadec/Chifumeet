@@ -3,8 +3,8 @@ import Image from 'next/image';
 import React from 'react'
 import avatar from "../../../../public/avatar.jpg"
 import { useCurrentUser } from '@/hooks/useCurrentUser';
-import ButtonAccepted from './ButtonAccepted';
-import ButtonDenied from './ButtonDenied';
+import ButtonAccepted from './_components/ButtonAccepted';
+import ButtonDenied from './_components/ButtonDenied';
 
 const getUser =  async (id) => {
   const user = await prisma.user.findUnique({
@@ -14,7 +14,6 @@ const getUser =  async (id) => {
   })
   return user;
 }
-
 
 const checkDuelInvitation =  async (currentId, userSenderId) => { // on restreint l'accès au profil/invitation uniquement à l'utilisateur qui a reçu l'invitation
   const checked = await prisma.notification.findFirst({

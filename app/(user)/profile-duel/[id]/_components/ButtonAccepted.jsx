@@ -1,7 +1,7 @@
 'use client'
 import { Button } from '@/components/ui/button'
 import React from 'react'
-import { duelAccepted } from './handleDuel'
+import { duelAccepted } from '@/app/(user)/profile-duel/[id]/_actions/duelAccepted'
 import { useRouter } from 'next/navigation'
 
 export default function ButtonAccepted({ currentUserId, senderId, invitId }) {

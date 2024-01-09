@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import avatar from "../../public/avatar.jpg"
+import avatar from "../../../public/avatar.jpg"
 
 export default function Rank({ rank }) {
     const { User } = rank

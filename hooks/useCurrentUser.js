@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth"
 import { revalidatePath } from "next/cache"
 
 export const useCurrentUser = async () => {
+    
     const session = await getServerSession(authOptions)
     const userEmail = session?.user?.email
 
@@ -24,7 +25,6 @@ export const useCurrentUser = async () => {
             }
         })
         revalidatePath('/')
-        return currentUser
-        
+        return currentUser     
     }return null;
 }

@@ -1,12 +1,12 @@
 'use client' // enhancement
 
 import useStep from "@/hooks/useStep"
-import { Input } from "../../../components/ui/input"
-import { Label } from "../../../components/ui/label"
-import { Textarea } from "../../../components/ui/textarea"
-import ButtonSubmitForm from "../../../components/ButtonSubmitForm"
+import { Input } from "../../../../components/ui/input"
+import { Label } from "../../../../components/ui/label"
+import { Textarea } from "../../../../components/ui/textarea"
+import ButtonSubmitForm from "../../../../components/ButtonSubmitForm"
 import Link from "next/link"
-import { Button } from "../../../components/ui/button"
+import { Button } from "../../../../components/ui/button"
 import { useForm } from "react-hook-form";
 import { signIn } from 'next-auth/react'
 import { useEffect } from "react"
@@ -34,7 +34,7 @@ export default function Registration() {
     }, (error) => {
       console.error('Erreur lors de l\'obtention de la position', error)
     }, {
-      enableHighAccuracy: true      
+      enableHighAccuracy: true
     })
   }, [setValue])
 
@@ -75,7 +75,7 @@ export default function Registration() {
         throw new Error('Erreur lors de l\'inscription')
       }
       const data = await res.json()
-   
+
       if (res.ok) {
         const { email, password } = formData
         signIn('credentials', {

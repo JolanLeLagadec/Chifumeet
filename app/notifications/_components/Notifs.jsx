@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { fetchUserNotifs, updateNotifs } from "./fetchUserNotifs"
+import { fetchUserNotifs, updateNotifs } from "../_actions/fetchUserNotifs"
 import { BellRing, Check } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -23,7 +23,7 @@ export function Notifs({ className, ...props }) {
   const [notifications, setNotifications] = useState([])
   const { currentUserId } = props
 
-  const idsNotifs = notifications.map( notif => notif.id)
+  const idsNotifs = notifications.map(notif => notif.id)
 
   useEffect(() => {
     const fetchNotifications = async () => {
@@ -34,8 +34,8 @@ export function Notifs({ className, ...props }) {
   }, [currentUserId])
 
   const readedCount = notifications.filter(notif => notif.readed === false)
- 
-  const notifsCount = readedCount.length 
+
+  const notifsCount = readedCount.length
 
 
   return (
@@ -60,14 +60,14 @@ export function Notifs({ className, ...props }) {
         <div>
           {notifications.map((notification) => (
             <div key={notification.id}>
-               <Notif notification={notification} />
+              <Notif notification={notification} />
             </div>
-          
+
           ))}
         </div>
       </CardContent>
       <CardFooter>
-        <Button onClick = {() => updateNotifs(idsNotifs) } className="w-full">
+        <Button onClick={() => updateNotifs(idsNotifs)} className="w-full">
           <Check className="mr-2 h-4 w-4" /> Marquer toutes les notifications comme lues
         </Button>
       </CardFooter>

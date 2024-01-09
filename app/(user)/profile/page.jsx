@@ -1,7 +1,7 @@
 
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 import React from 'react'
-import Content from './Content'
+import Content from './_components/Content'
 
 
 export default async function Profile() {

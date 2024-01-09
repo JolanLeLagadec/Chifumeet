@@ -1,12 +1,12 @@
 import avatar from "../../../public/avatar.jpg"
 import React from 'react'
-import { fetchParticipations } from './actions'
+import { fetchParticipations } from '@/app/duels/[id]/_actions/fetchParticipations'
 import Image from 'next/image'
 import { useCurrentUser } from "@/hooks/useCurrentUser"
-import ButtonHandleDuel from "./ButtonHandleDuel"
+import ButtonHandleDuel from "./_components/ButtonHandleDuel"
 import { redirect } from "next/dist/server/api-utils"
-import ModaleBackground from "./ModaleBackground"
-import ModaleResults from "./ModaleResults"
+import ModaleBackground from "./_components/ModaleBackground"
+import ModaleResults from "./_components/ModaleResults"
 import Chat from "@/components/chat/Chat"
 import IconChat from "@/components/chat/IconChat"
 import ClientContext from "@/components/chat/ClientContext"
@@ -27,7 +27,7 @@ export default async function Duel({ params }) {
     statut = participationCurrentUser.statut
   }
 
-  if (!currentUser ) {
+  if (!currentUser) {
     return <div>Accès non autorisé</div>
   }
   return (

@@ -3,7 +3,7 @@ import prisma from "@/lib/db/prisma"
 import { revalidatePath } from "next/cache"
 
 export const updateInformations = async (formData, id) => {
-
+    
     console.log(formData)
     const { name, bio } = formData
     const imageUrl = formData.image || ''

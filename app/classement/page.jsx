@@ -1,6 +1,6 @@
 import React from 'react'
-import { findUsersRanking } from './findUsersRanking'
-import Rank from './Rank'
+import { findUsersRanking } from './_actions/findUsersRanking'
+import Rank from './_components/Rank'
 
 
 

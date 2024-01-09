@@ -1,13 +1,13 @@
 'use client'
 import { Input } from "@/components/ui/input"
-import avatar from "../../../public/avatar.jpg"
+import avatar from "../../../../public/avatar.jpg"
 import { Textarea } from '@/components/ui/textarea'
 import Image from 'next/image'
 import { useState, useRef } from "react"
 import useEditModale from "@/hooks/useModaleEdit"
 import { Loader2, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { updateInformations } from "./actions"
+import { updateInformations } from "@/app/(user)/profile/_actions/updateInformations.js"
 
 export default function ModaleEdit({ bio, name, image, id }) {
 
@@ -20,7 +20,7 @@ export default function ModaleEdit({ bio, name, image, id }) {
   const extractFormData = (formData) => ({
     name: formData.get('name'),
     bio: formData.get('bio')
-});
+  });
 
 
   const handleUpdate = async (e) => {
@@ -32,7 +32,6 @@ export default function ModaleEdit({ bio, name, image, id }) {
     console.log(file)
 
     let formDataWithImageUrl = extractFormData(formData)
-
 
     let res;
     if (imageFile && file) {
@@ -46,18 +45,15 @@ export default function ModaleEdit({ bio, name, image, id }) {
       )
     }
     console.log('ici res', res)
-   
-    if (res && res.ok) {
-     let blob = await res.json()
-      formDataWithImageUrl.image = blob?.url;
-   
-    } 
 
-    const newUser = await updateInformations(formDataWithImageUrl, id )
+    if (res && res.ok) {
+      let blob = await res.json()
+      formDataWithImageUrl.image = blob?.url;
+    }
+
+    const newUser = await updateInformations(formDataWithImageUrl, id)
     setIsLoading(false)
     editModale.setIsOpen()
-
-
   }
 
   const refInputFile = useRef(null)
@@ -77,7 +73,7 @@ export default function ModaleEdit({ bio, name, image, id }) {
   }
 
   return (
-    <div className={`flex  justify-center items-center border-1 p-8 bg-slate-700 fixed z-20 bg-opacity-70 overflow-x-auto overflow-y-auto  inset-0`}>
+    <div className={`flex  justify-center items-center border-1 p-8 bg-slate-700 fixed z-20 bg-opacity-70 overflow-x-auto overflow-y-auto inset-0`}>
       <form onSubmit={handleUpdate} className="flex flex-col bg-slate-950 p-8 rounded-lg relative">
         <X color="white" width={54} className="absolute top-4 right-0 " onClick={() => editModale.setIsOpen()} />
         <div className='flex items-center gap-8'>

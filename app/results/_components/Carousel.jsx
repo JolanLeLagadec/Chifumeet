@@ -5,7 +5,7 @@ import 'swiper/css/scrollbar';
 import Opponent from './Opponent';
 import useChallenge from '@/hooks/useChallenge';
 import { useEffect } from 'react';
-import { challengeAlreadyExists, duelAlreadyStarted } from './handleChallenge';
+import { challengeAlreadyExists, duelAlreadyStarted } from '../_actions/handleChallenge';
 import { useState } from 'react'
 
 export default function Carousel({ users, currentUserId }) {
@@ -13,14 +13,10 @@ export default function Carousel({ users, currentUserId }) {
   const [opoInvit, setOpoInvitSent] = useState([])
   const [opoDuel, setOpoInDuel] = useState([])
   const challenge = useChallenge()
-  
 
   const idsOpoInvited = opoInvit.map(opo => opo.userId)
   const idsOpoAlreadyInDuel = opoDuel.map(opo => opo.userId)
-
   const usersIds = users.map(u => u.id)
-  
-
 
   useEffect(() => {
     async function isExisting() {
@@ -41,10 +37,10 @@ export default function Carousel({ users, currentUserId }) {
       onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}
     >
-      {users.filter(user => !idsOpoInvited.includes(user.id) && !idsOpoAlreadyInDuel.includes(user.id)) 
+      {users.filter(user => !idsOpoInvited.includes(user.id) && !idsOpoAlreadyInDuel.includes(user.id))
 
-      // Pour que les changements se reflètent immédiatement, on stock les ids de ceux défier dans un store global
-      // Au lieu de mettre la condition dans le filter, on la met dans le map. filter détermine le rendu initial, tandis que map est abonné aux chgmts, donc se met à jour si l'état/la condition n'est plus respectée.
+        // Pour que les changements se reflètent immédiatement, on stock les ids de ceux défier dans un store global
+        // Au lieu de mettre la condition dans le filter, on la met dans le map. filter détermine le rendu initial, tandis que map est abonné aux chgmts, donc se met à jour si l'état/la condition n'est plus respectée.
         .map((user) => (
           <>
             {

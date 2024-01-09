@@ -71,7 +71,7 @@ export default function ButtonSearchOpponents({ user }) {
       }}  
       size='xl'
       disabled={isLoading}
-      className='bg-gradient-to-r disabled:opacity-20 from-primary to-blue-800 dark:to-slate-300 text-transparent bg-clip-text p-6 text-3xl border-2 border-blue-400 rounded-2xl shadow-2xl dark:shadow-neutral-900 font-semibold  transition tracking-widest '>
+      className='bg-gradient-to-r disabled:opacity-20 from-primary to-blue-800 dark:to-slate-300 text-transparent bg-clip-text p-6 text-3xl border-2 border-blue-400 rounded-2xl dark:shadow-neutral-900 font-semibold  transition tracking-widest hover:opacity-80'>
       {
         isLoading && (
           <Loader2 className="mr-2 h-6 w-6 animate-spin " />
